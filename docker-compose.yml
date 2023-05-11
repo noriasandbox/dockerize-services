@@ -15,7 +15,8 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.100
 
   noria_mariadb:
     image: mariadb:10
@@ -32,7 +33,8 @@ services:
     volumes:
       - mariadb-data:/var/lib/mysql
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.101
 
   noria_mariadb_dev:
     image: mariadb:11.0-rc
@@ -49,7 +51,8 @@ services:
     volumes:
       - mariadb_dev-data:/var/lib/mysql
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.102
 
   noria_pma_server:
     image: nginx:1.24-alpine
@@ -62,7 +65,8 @@ services:
     depends_on:
       - noria_pma
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.103
 
   noria_pma:
     image: phpmyadmin:5.2-fpm-alpine
@@ -81,7 +85,8 @@ services:
       - noria_mariadb
       - noria_mariadb_dev
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.104
 
   noria_redis:
     image: redis:7.0-alpine
@@ -92,7 +97,8 @@ services:
     volumes:
       - redis-data:/data
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.105
 
   noria_memcached:
     image: memcached:1.6-alpine
@@ -101,7 +107,8 @@ services:
     ports:
       - '11212:11211'
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.106
 
   noria_mailserver:
     image: axllent/mailpit
@@ -111,7 +118,8 @@ services:
       - '8026:8025'
       - '1026:1025'
     networks:
-      - noria_network
+      noria_network:
+        ipv4_address: 10.88.0.107
 
 volumes:
   mysql-data:
@@ -127,4 +135,4 @@ networks:
     ipam:
       config:
         - subnet: 10.88.0.0/16
-          gateway: 10.88.0.1
+          gateway: 10.88.0.255
