@@ -57,6 +57,7 @@ services:
   noria_pma_server:
     image: nginx:1.24-alpine
     container_name: noria_pma_server
+    restart: always
     ports:
       - '8200:80'
     volumes:
